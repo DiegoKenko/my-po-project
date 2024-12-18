@@ -95,7 +95,7 @@ export class BrowseComponent {
     var procedencia: string = "";
     
     //Realiza um Get no Protheus para buscar os dados
-    this.http.get<any>('/zWsGrpProd/get_all?limit=100', {}).subscribe({
+    this.http.get<any>('csc.multitecnica.com.br:9092/apisa2', {}).subscribe({
       next: (v) => {
 
         //Percorre os objetos e vem adicionando no array
