@@ -41,9 +41,9 @@ export class AppComponent {
   }
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Cadastro do Grupo', action: this.browseClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'Cadastro' },
-    { label: 'Ajuda (Help)',      action: this.aboutClick.bind(this),  icon: 'po-icon-help',      shortLabel: 'Ajuda' },
-    { label: 'Sair',              action: this.closeApp.bind(this),    icon: 'po-icon-exit',      shortLabel: 'Sair' }
+    { label: 'Cadastro de regras', action: this.browseClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'Cadastro' },
+    { label: 'Histórico de execução', action: this.historyClick.bind(this), icon: 'po-icon-history', shortLabel: 'Histórico' },
+    { label: 'Sair',               action: this.closeApp.bind(this),    icon: 'po-icon-exit',      shortLabel: 'Sair' }
   ];
 
   //Ao clicar no Cadastro
@@ -51,9 +51,8 @@ export class AppComponent {
     this.router.navigate(['/', 'browse']);
   }
 
-  //Ao clicar no Sobre
-  private aboutClick() {
-    this.router.navigate(['/', 'about']);
+  private historyClick() {
+    this.router.navigate(['/', 'history']);
   }
 
   //Ao clicar no Sair

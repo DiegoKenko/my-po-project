@@ -17,24 +17,18 @@ import {
 } from '@po-ui/ng-components';
 
 @Component({
-  selector: 'app-browse',
+  selector: 'app-history',
   standalone: true,
   imports: [PoInfoModule, HttpClientModule, PoTableModule, PoSearchModule, PoButtonGroupModule],
-  templateUrl: './browse.component.html',
-  styleUrl: './browse.component.css'
+  templateUrl: './history.component.html',
+  styleUrl: './history.component.css'
 })
-export class BrowseComponent {
+export class HistoryComponent {
 
   //Variáveis que irão definir as colunas e os dados
   public columns: Array<PoTableColumn> = [];
   public items: Array<any> = [];
   public actions: Array<PoTableAction> = [];
-
-  //Botões acima da tabela
-  public topButtons: Array<PoButtonGroupItem> = [
-    { label: 'Nova regra', icon: 'po-icon-plus-circle', action: this.newButton.bind(this) },
-    { label: 'Atualizar Browse', icon: 'po-icon-refresh',     action: this.refreshBrowse.bind(this) },
-  ];
 
   //Construtor para criar a conexão HTTP e navegação com Router
   constructor(
@@ -60,7 +54,6 @@ export class BrowseComponent {
     //Aciona para buscar as colunas e os conteúdos delas
     this.columns = this.getColumns();
     this.items   = this.getItems();
-    this.actions = this.getActions();
 
     //Cria na SESSION o código do grupo e a operação
     sessionStorage.setItem("grupoId",   "");
@@ -70,9 +63,9 @@ export class BrowseComponent {
   //Busca as informações das colunas
   getColumns(): Array<PoTableColumn> {
     return [
-      { property: 'id', width: '8%' },
-      { property: 'descricao' },
-      { property: 'procedencia', width: '20%' },
+      { property: 'data', width: '8%' },
+      { property: 'hora' },
+      { property: 'tarefa', width: '20%' },    
     ];
   }
 
@@ -85,27 +78,7 @@ export class BrowseComponent {
     this.http.get<any>('csc.multitecnica.com.br:9092/apisa2', {}).subscribe({
       next: (v) => {
 
-        //Percorre os objetos e vem adicionando no array
-        for(var index in v.objects) {
-
-          if (v.objects[index].proori == "1")
-            procedencia = "1=Original";
-          else if (v.objects[index].proori == "0")
-            procedencia = "0=Nao Original";
-          else
-            procedencia = "";
-
-          itemsRequest.push(
-            {
-              grupo: v.objects[index].grupo,
-              descricao: v.objects[index].desc,
-              procedencia: procedencia,
-              status: v.objects[index].status
-            }
-          );
-
-        }
-        
+      
       },
       error: (e) => {
         itemsRequest = [];
@@ -120,22 +93,13 @@ export class BrowseComponent {
     return itemsRequest;
   }
 
-  //Botões na tabela
-  getActions(): Array<PoTableAction> {
-    return [
-      { label:"Visualizar", icon: "po-icon-eye",    action: this.viewButton.bind(this) },
-      { label:"Alterar",    icon: "po-icon-change", action: this.editButton.bind(this) },
-      { label:"Excluir",    icon: "po-icon-delete", action: this.deleteButton.bind(this), type: "danger" }
-    ]
-  }
-
   //Ação ao clicar no botão Refresh
   refreshBrowse() {
     this.items = this.getItems();
     
     //O trecho abaixo é opcional, esta apenas demonstrando a data e hora ao clicar no botão Refresh
     let dateTime = new Date();
-    var messageDate = "Abaixo as informações dos Grupos de Produtos ";
+    var messageDate = "Hist�rico de execu��es ";
 
     messageDate += "(atualizado em ";
     messageDate += dateTime.getDay() + "/" + dateTime.getMonth() + "/" + dateTime.getFullYear() + " às ";

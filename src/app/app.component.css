@@ -1,11 +1,11 @@
 /* Menu Principal */
 po-menu {
-    --color: #B4E2FD;
-    --background-color: #2C3739;
-    --color-menu-color-menu-item-text: #B4E2FD;
+    --color: #000102;
+    --background-color: #047a8f;
+    --color-menu-color-menu-item-text: #080c0f;
 }
 
 /* Título da Barra da Esquerda */
 .po-font-title {
-    color: #B4E2FD;
+    color: #020303;
 }
