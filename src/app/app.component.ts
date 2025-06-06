@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
 
 import { ProtheusLibCoreModule } from '@totvs/protheus-lib-core';
@@ -41,14 +41,24 @@ export class AppComponent {
   }
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Cadastro de regras', action: this.browseClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'Cadastro' },
+    { label: 'Cadastro de regras', icon: 'po-icon-clipboard', shortLabel: 'Cadastro',subItems:[
+      {label: 'Centro de custo', action: this.browseCCClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'Centro de custo'},
+      {label: 'Conta contábil', action: this.browseCntClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'Conta'},
+      {label: 'TES', action: this.browseTESClick.bind(this), icon: 'po-icon-clipboard', shortLabel: 'TES'}
+    ]},
     { label: 'Histórico de execução', action: this.historyClick.bind(this), icon: 'po-icon-history', shortLabel: 'Histórico' },
     { label: 'Sair',               action: this.closeApp.bind(this),    icon: 'po-icon-exit',      shortLabel: 'Sair' }
   ];
 
   //Ao clicar no Cadastro
-  private browseClick() {
-    this.router.navigate(['/', 'browse']);
+  private browseCCClick() {
+    this.router.navigate(['/', 'browseCC']);
+  }
+  private browseTESClick() {
+    this.router.navigate(['/', 'browseCnt']);
+  }
+  private browseCntClick() {
+    this.router.navigate(['/', 'browseTES']);
   }
 
   private historyClick() {
