@@ -10,6 +10,7 @@ import {
   PoTableColumn,
   PoTableAction,
 } from '@po-ui/ng-components';
+import { RegrasDatasource } from '../../../datasource/regras/regras.datasource';
 
 @Component({
   selector: 'app-tes-browse',
@@ -19,22 +20,25 @@ import {
   styleUrl: './tes.browse.component.css'
 })
 export class BrowseTESComponent {
-
   
     //Variáveis que irão definir as colunas e os dados
     public columns: Array<PoTableColumn> = [];
     public items: Array<any> = [];
-    public actions: Array<PoTableAction> = [];
-  
+    public actions: Array<PoTableAction> = [];  
   
     //Construtor para criar a conexão HTTP e navegação com Router
     constructor(
       private http: HttpClient,
-      private router: Router
+      private router: Router,
+      private regraDataSource:RegrasDatasource
     ) { };
   
     //Na Inicialização da página
     ngOnInit(): void {
+      //Aciona para buscar as colunas e os conteúdos delas
+      this.columns = this.getColumns();
+      this.getItems();
+  
       //Cria na SESSION o código do grupo e a operação
       sessionStorage.setItem("grupoId", "");
       sessionStorage.setItem("operation", "");
@@ -43,23 +47,24 @@ export class BrowseTESComponent {
     //Busca as informações das colunas
     getColumns(): Array<PoTableColumn> {
       return [
-        { property: 'data', width: '8%' },
-        { property: 'hora' },
-        { property: 'tarefa', width: '20%' },
+        { property: 'id', width: '8%' },
+        { property: 'ccEnt', label: "CC Entrada" },
+        { property: 'emp_ent', label: "Empresa" },
+        { property: 'tpProduto', label: "Tipo do produto" },
+        { property: 'tesSai', label: "TES Saída" },
+        { property: 'tesEnt', label: "TES Entrada" },
+        { property: 'substTrib', label: "Substituição trib." }
       ];
     }
   
     //Busca as informações via API
-    getItems(): Array<any> {
-      var itemsRequest: Array<any> = [];
-      var procedencia: string = "";
-
-      return itemsRequest;
+    getItems() {
+      this.items = this.regraDataSource.listarRegrasTES()
     }
   
     //Ação ao clicar no botão Refresh
     refreshBrowse() {
-      this.items = this.getItems();
+      this.getItems();
   
       //O trecho abaixo é opcional, esta apenas demonstrando a data e hora ao clicar no botão Refresh
       let dateTime = new Date();

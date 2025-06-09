@@ -10,6 +10,7 @@ import {
   PoTableColumn,
   PoTableAction,
 } from '@po-ui/ng-components';
+import { RegrasDatasource } from '../../../datasource/regras/regras.datasource';
 
 @Component({
   selector: 'app-conta-browse',
@@ -29,11 +30,16 @@ export class BrowseContaComponent {
   //Construtor para criar a conexão HTTP e navegação com Router
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private regraDataSource:RegrasDatasource
   ) { };
 
   //Na Inicialização da página
   ngOnInit(): void {
+    //Aciona para buscar as colunas e os conteúdos delas
+    this.columns = this.getColumns();
+    this.getItems();
+
     //Cria na SESSION o código do grupo e a operação
     sessionStorage.setItem("grupoId", "");
     sessionStorage.setItem("operation", "");
@@ -42,26 +48,27 @@ export class BrowseContaComponent {
   //Busca as informações das colunas
   getColumns(): Array<PoTableColumn> {
     return [
-      { property: 'data', width: '8%' },
-      { property: 'hora' },
-      { property: 'tarefa', width: '20%' },
+      { property: 'id', width: '8%' },
+      { property: 'ccSai', label: "CC Saida" },
+      { property: 'ccEnt', label: "CC Entrada" },
+      { property: 'emp_ent', label: "Empresa" },
+      { property: 'conta', label: "Conta" },
+      { property: 'tpProduto', label: "Tipo do produto" }
     ];
   }
 
   //Busca as informações via API
-  getItems(): Array<any> {
-    var itemsRequest: Array<any> = [];
-    var procedencia: string = "";
-    return itemsRequest;
+  getItems() {
+    this.items = this.regraDataSource.listarRegrasCnt()
   }
 
   //Ação ao clicar no botão Refresh
   refreshBrowse() {
-    this.items = this.getItems();
+    this.getItems();
 
     //O trecho abaixo é opcional, esta apenas demonstrando a data e hora ao clicar no botão Refresh
     let dateTime = new Date();
-    var messageDate = "Histórico de execuções ";
+    var messageDate = ''
 
     messageDate += "(atualizado em ";
     messageDate += dateTime.getDay() + "/" + dateTime.getMonth() + "/" + dateTime.getFullYear() + " às ";

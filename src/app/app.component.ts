@@ -55,10 +55,10 @@ export class AppComponent {
     this.router.navigate(['/', 'browseCC']);
   }
   private browseTESClick() {
-    this.router.navigate(['/', 'browseCnt']);
+    this.router.navigate(['/', 'browseTES']);
   }
   private browseCntClick() {
-    this.router.navigate(['/', 'browseTES']);
+    this.router.navigate(['/', 'browseCnt']);
   }
 
   private historyClick() {

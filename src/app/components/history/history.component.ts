@@ -99,7 +99,7 @@ export class HistoryComponent {
     
     //O trecho abaixo é opcional, esta apenas demonstrando a data e hora ao clicar no botão Refresh
     let dateTime = new Date();
-    var messageDate = '';
+    var messageDate = "Hist�rico de execu��es ";
 
     messageDate += "(atualizado em ";
     messageDate += dateTime.getDay() + "/" + dateTime.getMonth() + "/" + dateTime.getFullYear() + " às ";

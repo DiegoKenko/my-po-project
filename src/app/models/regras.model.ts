@@ -3,17 +3,18 @@ export class Regra{
     id: number;
     ccEnt:String;
     ccSai:String;
-    emp_saida:String;
+    emp_ent:String;
     codCliente:String;
     lojaCliente:String;
     tesEnt:String;
     tesSai:String;
     tpProduto:String;
     conta: String;
+    
     substTrib:String;
 
     constructor(id: number, ccEnt: String, ccSai: String, tesEnt: String, tesSai: String, tpProduto: String, 
-        conta: String, emp_saida: String, codCliente: String, lojaCliente: String, substTrib: String) {
+        conta: String, emp_ent: String, codCliente: String, lojaCliente: String, substTrib: String) {
         this.id = id;
         this.tpProduto = tpProduto;
         this.tesEnt = tesEnt;
@@ -21,7 +22,7 @@ export class Regra{
         this.ccEnt = ccEnt;
         this.ccSai = ccSai;
         this.conta = conta;
-        this.emp_saida = emp_saida;
+        this.emp_ent = emp_ent;
         this.codCliente = codCliente;
         this.lojaCliente = lojaCliente;
         this.substTrib = substTrib;
@@ -52,7 +53,7 @@ export class Regra{
             tes_saida: this.tesSai,
             tp_produto: this.tpProduto,
             conta: this.conta,
-            emp_saida: this.emp_saida,
+            emp_ent: this.emp_ent,
             cod_cliente: this.codCliente,
             loja_cliente: this.lojaCliente,
             subst_trib: this.substTrib

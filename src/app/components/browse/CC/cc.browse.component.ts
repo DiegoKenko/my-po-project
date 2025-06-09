@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import {  Router } from '@angular/router';
@@ -11,6 +11,8 @@ import {
   PoTableAction,
 } from '@po-ui/ng-components';
 import { RegrasDatasource } from '../../../datasource/regras/regras.datasource';
+import { Observable, ObservableInput } from 'rxjs';
+import { Regra } from '../../../models/regras.model';
 
 @Component({
   selector: 'app-cc-browse',
@@ -23,7 +25,7 @@ export class BrowseCCComponent {
 
   //Variáveis que irão definir as colunas e os dados
   public columns: Array<PoTableColumn> = [];
-  public items: Array<any> = [];
+  public items: Array<Regra> = [];
   public actions: Array<PoTableAction> = [];
 
 
@@ -32,13 +34,15 @@ export class BrowseCCComponent {
     private http: HttpClient,
     private router: Router,
     private regraDataSource:RegrasDatasource
-  ) { };
+  ) { 
+  
+  };
 
   //Na Inicialização da página
   ngOnInit(): void {
     //Aciona para buscar as colunas e os conteúdos delas
     this.columns = this.getColumns();
-    this.items   = this.getItems();
+    this.getItems();
 
     //Cria na SESSION o código do grupo e a operação
     sessionStorage.setItem("grupoId", "");
@@ -48,22 +52,25 @@ export class BrowseCCComponent {
   //Busca as informações das colunas
   getColumns(): Array<PoTableColumn> {
     return [
-      { property: 'data', width: '8%' },
-      { property: 'hora' },
-      { property: 'tarefa', width: '20%' },
+      { property: 'id', width: '8%' },
+      { property: 'ccSai',label:"CC Saida" },
+      { property: 'ccEnt',label:"CC Entrada" },
+      { property: 'emp_ent',label:"Empresa" },
+      { property: 'codCliente',label:"Cliente" },
+      { property: 'lojaCliente',label:"Loja" },
+      { property: 'tpProduto',label:"Tipo do produto" }
     ];
+
   }
 
   //Busca as informações via API
-  getItems(): Array<any> {
-    var itemsRequest: Array<any> = [];
-    var procedencia: string = "";
-    return this.regraDataSource.listarRegrasCC()
+  getItems(){
+    this.items = this.regraDataSource.listarRegrasCC()
   }
 
   //Ação ao clicar no botão Refresh
   refreshBrowse() {
-    this.items = this.getItems();
+    this.getItems();
 
     //O trecho abaixo é opcional, esta apenas demonstrando a data e hora ao clicar no botão Refresh
     let dateTime = new Date();
