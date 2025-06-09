@@ -5,7 +5,8 @@ import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PoHttpRequestModule } from '@po-ui/ng-components';
-import { RegrasDatasource } from './datasource/regras/regras.datasource';
+import { RegrasDatasource } from './datasource/regras/regras.datasource';;
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,3 +19,4 @@ export const appConfig: ApplicationConfig = {
   ],
   
 };
+

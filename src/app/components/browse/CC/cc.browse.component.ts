@@ -1,14 +1,14 @@
 import { Component, effect } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   PoInfoModule,
   PoTableModule,
   PoSearchModule,
   PoButtonGroupModule,
   PoTableColumn,
-  PoTableAction,
+  PoTableAction, PoFieldModule,
 } from '@po-ui/ng-components';
 import { RegrasDatasource } from '../../../datasource/regras/regras.datasource';
 import { Observable, ObservableInput } from 'rxjs';
@@ -17,7 +17,7 @@ import { Regra } from '../../../models/regras.model';
 @Component({
   selector: 'app-cc-browse',
   standalone: true,
-  imports: [PoInfoModule, HttpClientModule, PoTableModule, PoSearchModule, PoButtonGroupModule],
+  imports: [PoInfoModule, HttpClientModule, PoTableModule, PoSearchModule, PoButtonGroupModule, PoFieldModule],
   templateUrl: './cc.browse.component.html',
   styleUrl: './cc.browse.component.css'
 })
@@ -33,9 +33,9 @@ export class BrowseCCComponent {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private regraDataSource:RegrasDatasource
-  ) { 
-  
+    private regraDataSource: RegrasDatasource
+  ) {
+
   };
 
   //Na Inicialização da página
@@ -53,18 +53,17 @@ export class BrowseCCComponent {
   getColumns(): Array<PoTableColumn> {
     return [
       { property: 'id', width: '8%' },
-      { property: 'ccSai',label:"CC Saida" },
-      { property: 'ccEnt',label:"CC Entrada" },
-      { property: 'emp_ent',label:"Empresa" },
-      { property: 'codCliente',label:"Cliente" },
-      { property: 'lojaCliente',label:"Loja" },
-      { property: 'tpProduto',label:"Tipo do produto" }
+      { property: 'ccEnt', label: "CC Entrada" },
+      { property: 'ccSai', label: "CC Saida" },
+      { property: 'codCliente', label: "Cliente" },
+      { property: 'tpProduto', label: "Tipo do produto" },
+      { property: 'emp_ent', label: "Empresa" }
     ];
 
   }
 
   //Busca as informações via API
-  getItems(){
+  getItems() {
     this.items = this.regraDataSource.listarRegrasCC()
   }
 

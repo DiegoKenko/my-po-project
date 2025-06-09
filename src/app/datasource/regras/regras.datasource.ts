@@ -27,7 +27,7 @@ export class RegrasDatasource {
         let regras: Array<Regra>;
         regras = [];
         this.http.get<Array<Regra>>(this.cBaseUrl, {
-            params: { "tipo": 'CCT' }
+            params: { "tipo": 'CCT' },
         }).subscribe({
             next: (v: any) => {
                 for (let index = 0; index < v.regras.length; index++) {

@@ -23,6 +23,7 @@
     "@po-ui/ng-templates": "^18.21.0",
     "@totvs/protheus-lib-core": "^17.3.3",
     "genkit": "^1.11.1",
+    "ng-http-caching": "^20.0.1",
     "rxjs": "~7.8.0",
     "subsink": "^1.0.2",
     "tslib": "^2.3.0",

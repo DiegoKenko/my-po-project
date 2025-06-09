@@ -1,13 +1,6 @@
-<po-info p-label="Regras para TES" p-value=""> </po-info>
+<po-textarea p-label="Regras para TES"
+  p-placeholder="Aqui contém as regras para preenchimento da TES no documento de saída (SD2) e no documento de entrada (SD1)."
+  [p-readonly]="true"></po-textarea>
 
-<po-table
-  [p-auto-collapse]="true"
-  [p-columns]="columns"
-  [p-hide-columns-manager]="true"
-  [p-hide-table-search]="false"
-  [p-items]="items"
-  [p-sort]="true"
-  [p-striped]="true"
-  [p-actions]="actions"
-  [p-actions-right]="true"
-></po-table>
+<po-table [p-auto-collapse]="true" [p-columns]="columns" [p-hide-columns-manager]="true" [p-hide-table-search]="false"
+  [p-items]="items" [p-sort]="true" [p-striped]="true" [p-actions]="actions" [p-actions-right]="true"></po-table>

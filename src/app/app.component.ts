@@ -5,6 +5,7 @@ import { RouterOutlet, Router } from '@angular/router';
 
 import { ProtheusLibCoreModule } from '@totvs/protheus-lib-core';
 import { ProAppConfigService } from '@totvs/protheus-lib-core';
+import { NgHttpCachingModule, NgHttpCachingConfig } from 'ng-http-caching';
 
 import {
   PoMenuItem,
@@ -23,6 +24,7 @@ import {
     PoMenuModule,
     PoPageModule,
     ProtheusLibCoreModule,
+    NgHttpCachingModule,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],

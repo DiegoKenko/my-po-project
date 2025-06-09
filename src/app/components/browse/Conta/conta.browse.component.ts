@@ -9,13 +9,15 @@ import {
   PoButtonGroupModule,
   PoTableColumn,
   PoTableAction,
+ PoTextareaComponent,
+ PoFieldModule,
 } from '@po-ui/ng-components';
 import { RegrasDatasource } from '../../../datasource/regras/regras.datasource';
 
 @Component({
   selector: 'app-conta-browse',
   standalone: true,
-  imports: [PoInfoModule, HttpClientModule, PoTableModule, PoSearchModule, PoButtonGroupModule],
+  imports: [PoInfoModule, HttpClientModule, PoTableModule, PoSearchModule, PoButtonGroupModule,PoFieldModule],
   templateUrl: './conta.browse.component.html',
   styleUrl: './conta.browse.component.css'
 })
@@ -49,10 +51,10 @@ export class BrowseContaComponent {
   getColumns(): Array<PoTableColumn> {
     return [
       { property: 'id', width: '8%' },
+      { property: 'conta', label: "Conta" },
       { property: 'ccSai', label: "CC Saida" },
       { property: 'ccEnt', label: "CC Entrada" },
       { property: 'emp_ent', label: "Empresa" },
-      { property: 'conta', label: "Conta" },
       { property: 'tpProduto', label: "Tipo do produto" }
     ];
   }
