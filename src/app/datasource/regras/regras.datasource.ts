@@ -5,24 +5,9 @@ import { endWith, Observable } from "rxjs";
 
 export class RegrasDatasource {
 
-    cBaseUrl = "http://10.2.0.52:8080/rest/WSP74/wsP74TIPO/"
+    cBaseUrl = "http://10.2.0.5:8889/rest/WSP74/wsP74TIPO/"
     http = inject(HttpClient)
 
-    listarRegras(): Array<Regra> {
-        this.http.get(this.cBaseUrl).subscribe({
-            next: (v) => {
-                console.log(v.toString)
-            },
-            error: (e) => {
-                console.log(e.toString)
-                return [];
-            },
-            complete: () => {
-                return [];
-            }
-        })
-        return [];
-    }
     listarRegrasCC(): Array<Regra> {
         let regras: Array<Regra>;
         regras = [];
